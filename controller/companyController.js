@@ -1,22 +1,20 @@
-const { CLIENT_LONG_PASSWORD } = require('mysql/lib/protocol/constants/client');
-var {db} = require('../db.js');
-var {Company} = require('../model/company');
+var { db } = require('../db.js');
+var { Company } = require('../model/company');
 var { saveImage } = require('../controller/uploadImageController');
 
 exports.Create = async(req, res)=> {
    try {
-
        photo = await saveImage(req.body.photo);
        c = new Company(req.body.name, req.body.address, photo);
 
        const q = `INSERT INTO company (name, address, photo) VALUES (?, ?, ?)`;
          db.query(q, [c.name, c.address, c.photo], (err, result) => {
-                return res.status(200).json({
+                return res.status(201).json({
+                    status: 'OK',
                     message: 'Company created successfully',
                 });
             }
             );
-
    } catch (error) {
     return res.status(500).json({
         status: 'INTERNAL_SERVER_ERROR',

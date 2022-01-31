@@ -5,7 +5,7 @@ const path = require('path');
 exports.saveImage = async (baseImage) => {
   const projectPath = path.join(__dirname, '../uploads');
   const ex = baseImage.substring(baseImage.indexOf('/') + 1, baseImage.indexOf(';base64'));
-
+  
   // set file name
   let fileName = "";
   if (ex === 'svg+xml') {
