@@ -3,21 +3,18 @@ const path = require('path');
 
 // save image to folder uploads with base64 encoded string
 exports.saveImage = async (baseImage) => {
-
   const projectPath = path.join(__dirname, '../uploads');
-
   const ex = baseImage.substring(baseImage.indexOf('/') + 1, baseImage.indexOf(';base64'));
 
   // set file name
-  var fileName = "";
+  let fileName = "";
   if (ex === 'svg+xml') {
     fileName = `${Date.now()}.svg`;
   }else{
     fileName =`${Date.now()}.${ex}`;
   }
   
-  var image = decodeBase64Image(baseImage);
-
+  let image = decodeBase64Image(baseImage);
   // save image to folder uploads
   await fs.writeFileSync(`${projectPath}/${fileName}`, image.data, { encoding: 'base64' });
 
