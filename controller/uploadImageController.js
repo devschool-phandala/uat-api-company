@@ -27,9 +27,9 @@ const decodeBase64Image = (dataString) => {
   if (matches.length !== 3 || !matches) {
     return new Error('Invalid input string')
   }
-  console.log(matches);
-  let image = {}
-  image.type = matches[1]
-  image.data = matches[2]
-  return image
+
+  return {
+    type: matches[1],
+    data: matches[2]
+  }
 }
