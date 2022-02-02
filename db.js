@@ -1,10 +1,12 @@
 const mysql = require('mysql');
+var config = require('./config');
+
 
 var db = mysql.createConnection({
-    host: 'localhost', // hostname
-    user: 'root', // username
-    password: 'toor', // password
-    database: 'company' // database name
+    host: config.DB_HOST, // hostname
+    user: config.DB_USER, // username
+    password: config.DB_PASS, // password
+    database: config.DB_NAME // database name
 });
 
 db.connect((err) => {
@@ -15,4 +17,4 @@ db.connect((err) => {
       console.log('Connection established');
 });
 
-module.exports = {db};
+module.exports = { db };

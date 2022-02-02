@@ -6,4 +6,4 @@ class Company {
   }
 }
 
-module.exports = {Company};
+module.exports = { Company };

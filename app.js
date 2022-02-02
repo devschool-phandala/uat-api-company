@@ -5,7 +5,6 @@ var logger = require('morgan');
 const hbs = require('hbs')
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var companyRouter = require('./routes/company');
 
 var app = express();
@@ -20,6 +19,9 @@ app.set('views', path.join(__dirname,'views'))
 app.set('view engine', 'hbs')
 
 app.use('/', indexRouter);
+
+var usersRouter = require('./routes/users');
+
 app.use('/users', usersRouter);
 
 app.use('/api/company', companyRouter);

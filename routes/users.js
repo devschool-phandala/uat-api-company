@@ -2,8 +2,11 @@ var express = require('express');
 var router = express.Router();
 
 // import user controller
-const { index } = require('../controller/userController');
+const userController = require('../controller/userController');
 
-router.get('/', index );
+router.get('/', userController.index );
+
+router.post('/', userController.register);
+
 
 module.exports = router;
