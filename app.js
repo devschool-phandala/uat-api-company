@@ -26,5 +26,15 @@ app.use('/users', usersRouter);
 
 app.use('/api/company', companyRouter);
 
+// catch error and forward to error handler
+app.use((err,req, res, next) => {
+  const status = err.statusCode || 500;
+
+  return res.status(status).json({
+    status: status,
+    message: err.message
+  });
+})
+
 module.exports = app;
 

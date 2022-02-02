@@ -1,7 +1,6 @@
-var { User } = require('../model/user'); // load User model.
-var { db } = require('../db.js'); // load db connection.
+var { User } = require('../model/user');
+var { db } = require('../db.js');
 
-// function to register new user
 exports.register = async (req,res, next) =>{
   try {
     let {username, password, email} = req.body
@@ -11,20 +10,26 @@ exports.register = async (req,res, next) =>{
     u.password = await u.hashPassword(password)
     u.email = email;
 
-    const q = `INSERT INTO users (username, password, email, role) VALUES (?, ?, ?, ?)`;
-    db.query(q, [u.username, u.password, u.email, u.role], (err, result) => {
-           return res.status(201).json({
+    // Check if user already exists
+    db.query(`SELECT username FROM users WHERE username = '${username}'`, (err, result) => {
+      if (!result.length > 0){
+        const q = `INSERT INTO users (username, password, email, role) VALUES (?, ?, ?, ?)`;
+        db.query(q, [u.username, u.password, u.email, u.role], (err, result) => {
+          return res.status(201).json({
                status: 'OK',
                message: 'User created successfully',
-           });
-       }
-    );
+            });
+        });
+
+      } else{
+        err = new Error('User already exists');
+        err.statusCode = 409;
+        next(err);
+      }
+    });  
   }
   catch(err){
-    return res.status(500).json({
-      status: 'INTERNAL_SERVER_ERROR',
-      message: err.message
-    });
+    next(err);
   }
 }
 
