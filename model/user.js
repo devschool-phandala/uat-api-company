@@ -14,6 +14,13 @@ class User {
       let hash = await bcrypt.hashSync(password, salt);
       return hash;
   }
+
+  // create function for comparing password
+  async comparePassword(password) {
+      let result = await bcrypt.compareSync(password, this.password);
+      return result;
+  }
+  
 }
 
 

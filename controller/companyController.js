@@ -34,10 +34,7 @@ exports.GetAll = async(req, res)=> {
          }
          );
     } catch (error) {
-        return res.status(500).json({
-            status: 'INTERNAL_SERVER_ERROR',
-            message: error.message
-        });
+       next(error);
     }
 }
 
