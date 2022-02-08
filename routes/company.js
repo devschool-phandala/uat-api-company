@@ -1,14 +1,15 @@
 var express = require('express');
 var router = express.Router();
-
-// Require controller modules.
 var companyController = require('../controller/companyController');
+
+var passportJWT = require('../middleware/passportJWT'); 
+
+var checkAdmin = require('../middleware/checkAdmin');
+
+router.get('/',[passportJWT.IsLoggedIn, checkAdmin.IsAdmin], companyController.GetAll);
 
 // route for create company
 router.post('/', companyController.Create);
-
-// route for get all company
-router.get('/', companyController.GetAll);
 
 // route for update company with id
 router.put('/:id', companyController.Update);

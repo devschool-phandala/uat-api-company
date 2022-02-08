@@ -70,11 +70,11 @@ exports.login = (req, res, next) => {
           role: user.role
         }, process.env.JWT_SECRET, { expiresIn: '1h' });
         
-        let express_in = jwt.decode(token);
+        let decode = jwt.decode(token);
 
         return res.status(200).json({
           access_token: token,
-          express_in: express_in.exp
+          express_in: decode.exp
         });
       }
 

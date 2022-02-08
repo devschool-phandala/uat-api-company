@@ -6,6 +6,7 @@ const hbs = require('hbs')
 
 var indexRouter = require('./routes/index');
 var companyRouter = require('./routes/company');
+var passport = require('passport');
 
 var app = express();
 
@@ -14,6 +15,8 @@ app.use(express.json());
 // app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(passport.initialize())
 
 app.set('views', path.join(__dirname,'views'))
 app.set('view engine', 'hbs')
