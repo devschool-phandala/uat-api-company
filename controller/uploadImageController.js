@@ -14,9 +14,9 @@ exports.saveImage = async (baseImage) => {
     fileName =`${Date.now()}.${ex}`;
   }
   
-  let image = decodeBase64Image(baseImage);
+  // let image = decodeBase64Image(baseImage);
   // save image to folder uploads
-  await fs.writeFileSync(`${projectPath}/${fileName}`, image.data, { encoding: 'base64' });
+  // await fs.writeFileSync(`${projectPath}/${fileName}`, image.data, { encoding: 'base64' });
 
   return fileName;
 }
